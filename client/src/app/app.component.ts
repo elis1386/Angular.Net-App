@@ -1,23 +1,28 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from "./components/home/home.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarComponent, NavbarComponent, HomeComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
+  private authService = inject(AuthService);
   title = 'Dating app';
-  users = signal<any[]>([]);
-
-  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.auth.getUsers().subscribe(users => {
-      this.users.set(users)
-    });
+    this.setCurrentUser();
   }
+  setCurrentUser() {
+    const userString = localStorage.getItem('user');
+    if (!userString) return;
+    const user = JSON.parse(userString);
+    this.authService.currentUser.set(user);
+  }
+
 }

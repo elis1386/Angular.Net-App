@@ -1,0 +1,20 @@
+<div class="container mt-5">
+  <div style="text-align: center;">
+    @if(!regigsterMode) {
+      <h1>Find your match</h1>
+      <p>Find your perfect match with our dating app</p>
+      <div class="text-center">
+        <button class="btn btn-primary btn-lg me-2" (click)="registerToggle()">Register</button>
+        <button class="btn btn-outline-primary btn-lg me-2">Learn more</button>
+      </div>
+    } @else {
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

@@ -1,16 +1,45 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { User } from '../models/user';
+import { map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  httpClient = inject(HttpClient);
-  baseUrl = 'https://localhost:5001/api';
+  http = inject(HttpClient);
+  baseUrl = 'http://localhost:5000/api/';
+  currentUser = signal<User | null>(null);
 
-  constructor() { }
+  login(model: any) {
+    return this.http.post<User>(`${this.baseUrl}account/login`, model).pipe(
+      map((user) => {
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUser.set(user);
+        }
+      })
+    );
+  }
+
+  register(model: any) {
+    return this.http.post<User>(`${this.baseUrl}account/register`, model).pipe(
+      map((user) => {
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUser.set(user);
+        }
+        return user;
+      })
+    );
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    this.currentUser.set(null);
+  }
 
   getUsers() {
-    return this.httpClient.get<any[]>(`${this.baseUrl}/users`);
+    return this.http.get<any[]>(`${this.baseUrl}users`);
   }
 }
