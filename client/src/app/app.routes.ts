@@ -6,6 +6,9 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsComponent } from './components/forms/forms.component';
 import { authGuard } from './guards/auth.guard';
+import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +23,9 @@ export const routes: Routes = [
       { path: 'messages', component: MessagesComponent },
     ]
   },
+  {path: 'errors', component: TestErrorsComponent},
+  {path: 'not-found', component: NotFoundComponent},
+  {path: 'server-error', component: ServerErrorComponent},
   {path: 'form', component: FormsComponent},
-  { path: '**', component: HomeComponent, pathMatch: 'full' },
+  {path: '**', component: HomeComponent, pathMatch: 'full' },
 ];

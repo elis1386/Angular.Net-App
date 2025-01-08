@@ -12,6 +12,9 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
+            </li>
           }
           </ul>
  
@@ -29,7 +32,7 @@
         <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
           <input class="rounded me-2 p-2 border-0" type="text" placeholder="Username" name="username" [(ngModel)]="model.username" required>
           <input class="rounded me-2 p-2 border-0" type="password" placeholder="Password" name="password" [(ngModel)]="model.password" required>
-          <button class="btn btn-success" type="submit">Login</button>
+          <button class="btn btn-secondary" type="submit">Login</button>
         </form>
         }
     </div>

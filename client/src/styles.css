@@ -1,42 +1,9 @@
-/* 
-:root
-{
-    --primary-color: #563D7C;
-    --hover-color: #b786f6;
-    --secondary-color: #6c757d;
-    --success-color: #28a745;
-    --info-color: #17a2b8;
-    --warning-color: #ffc107;
-    --danger-color: #dc3545;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
- 
-}
-.btn-primary
-{
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
-}
-.btn-primary:hover
-{
-    background-color: var(--hover-color);
-    border-color: var(--hover-color);
-    color:white;
-}
-.btn-outline-primary
-{
-    background-color: white;
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-}
-.btn-outline-primary:hover
-{
-    background-color: var(--hover-color);
-    border-color: var(--hover-color);
-    color:white;
-}
-     */
-a{
+.ngx-toastr {
+    width: 350px !important; 
+    display: flex;
+    gap: 10px;
+
+  }
+  a {
     text-decoration: none;
-}
+  }
