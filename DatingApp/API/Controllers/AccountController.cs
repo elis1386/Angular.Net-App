@@ -15,14 +15,15 @@ public class AccountController(DataContext context, ITokenService tokenService) 
   public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
   {
     if (await UserExists(registerDTO.Username)) return BadRequest("Username is taken");
-
-    using var hmac = new HMACSHA512();
+    return Ok();
+    /* using var hmac = new HMACSHA512();
 
     var user = new AppUser
     {
       UserName = registerDTO.Username.ToLower(),
       PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password)),
       PasswordSalt = hmac.Key
+
     };
 
     context.Users.Add(user);
@@ -31,7 +32,7 @@ public class AccountController(DataContext context, ITokenService tokenService) 
     {
       Username = user.UserName,
       Token = tokenService.CreateToken(user)
-    };
+    }; */
 
   }
 
