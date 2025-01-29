@@ -4,7 +4,6 @@ import { MemberDetailComponent } from './components/member/member-detail/member-
 import { ListsComponent } from './components/lists/lists.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { HomeComponent } from './components/home/home.component';
-import { FormsComponent } from './components/forms/forms.component';
 import { authGuard } from './guards/auth.guard';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
@@ -17,15 +16,18 @@ export const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [authGuard],
     children: [
-      { path: 'members', component: MemberListComponent, canActivate: [authGuard]  },
+      {
+        path: 'members',
+        component: MemberListComponent,
+        canActivate: [authGuard],
+      },
       { path: 'members/:id', component: MemberDetailComponent },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
-    ]
+    ],
   },
-  {path: 'errors', component: TestErrorsComponent},
-  {path: 'not-found', component: NotFoundComponent},
-  {path: 'server-error', component: ServerErrorComponent},
-  {path: 'form', component: FormsComponent},
-  {path: '**', component: HomeComponent, pathMatch: 'full' },
+  { path: 'errors', component: TestErrorsComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'server-error', component: ServerErrorComponent },
+  { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
