@@ -1,39 +1,73 @@
-<nav class="navbar navbar-expand-md navbar-primary bg-primary" aria-label="Fourth navbar example">
-    <div class="container">
-      <a class="navbar-brand text-white" routerLink="/" routerLinkActive="active">Dating App</a>
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          @if (authService.currentUser())  {
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
-            </li>
-          }
-          </ul>
- 
-      @if(authService.currentUser()){
-        <div dropdown class="dropdown">
-            <a dropdownToggle class="dropdown-toggle text-light">Welcome  {{authService.currentUser()?.username | titlecase}} </a>
-            <div *dropdownMenu class="dropdown-menu">
-                <a class="dropdown-item">Edit profile</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" (click)="logout()">Logout</a>
-            </div>
-        </div>
+<nav
+  class="navbar navbar-expand-md navbar-primary bg-primary"
+  aria-label="Fourth navbar example"
+>
+  <div class="container">
+    <a class="navbar-brand text-white" routerLink="/" routerLinkActive="active"
+      >Dating App</a
+    >
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      @if (authService.currentUser()) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/members" routerLinkActive="active"
+            >Matches</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/lists" routerLinkActive="active"
+            >Lists</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/messages" routerLinkActive="active"
+            >Messages</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/errors" routerLinkActive="active"
+            >Errors</a
+          >
+        </li>
       }
-      @if (!authService.currentUser())  { 
-        <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
-          <input class="rounded me-2 p-2 border-0" type="text" placeholder="Username" name="username" [(ngModel)]="model.username" required>
-          <input class="rounded me-2 p-2 border-0" type="password" placeholder="Password" name="password" [(ngModel)]="model.password" required>
-          <button class="btn btn-secondary" type="submit">Login</button>
-        </form>
-        }
-    </div>
-  </nav>
+    </ul>
+
+    @if (authService.currentUser()) {
+      <div dropdown class="dropdown">
+        <a dropdownToggle class="dropdown-toggle text-light"
+          >Welcome {{ authService.currentUser()?.username | titlecase }}
+        </a>
+        <div *dropdownMenu class="dropdown-menu">
+          <a routerLink="/member/edit" class="dropdown-item">Edit profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
+    }
+    @if (!authService.currentUser()) {
+      <form
+        class="d-flex"
+        #loginForm="ngForm"
+        (ngSubmit)="login()"
+        autocomplete="off"
+      >
+        <input
+          class="rounded me-2 p-2 border-0"
+          type="text"
+          placeholder="Username"
+          name="username"
+          [(ngModel)]="model.username"
+          required
+        />
+        <input
+          class="rounded me-2 p-2 border-0"
+          type="password"
+          placeholder="Password"
+          name="password"
+          [(ngModel)]="model.password"
+          required
+        />
+        <button class="btn btn-secondary" type="submit">Login</button>
+      </form>
+    }
+  </div>
+</nav>

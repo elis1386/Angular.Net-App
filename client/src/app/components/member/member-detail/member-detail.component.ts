@@ -21,7 +21,6 @@ export class MemberDetailComponent {
 
   ngOnInit(): void {
     this.loadMember();
-    console.log(this.member);
   }
 
   loadMember() {
