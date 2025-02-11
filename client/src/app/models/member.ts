@@ -2,14 +2,16 @@ import { Photo } from './photo';
 
 export interface Member {
   id: number;
-  userName: string;
+  username: string;
   age: number;
   photoUrl: string;
   knownAs: string;
   created: Date;
   lastActive: Date;
+  gender: string;
   introduction: string;
-  intrestes: string;
+  intrests: any;
+  lookingFor: string;
   city: string;
   country: string;
   photos: Photo[];
