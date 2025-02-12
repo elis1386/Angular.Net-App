@@ -97,5 +97,31 @@
   },
   "cli": {
     "analytics": false
+  },
+  "projects": {
+    "your-project-name": {
+      "architect": {
+        "build": {
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
   }
 }
