@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250211114346_InitialCreate")]
+    [Migration("20250217112750_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -103,6 +103,21 @@ namespace API.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("API.Entities.UserLike", b =>
+                {
+                    b.Property<int>("SourseUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TargetUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("SourseUserId", "TargetUserId");
+
+                    b.HasIndex("TargetUserId");
+
+                    b.ToTable("Likes");
+                });
+
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
@@ -114,8 +129,31 @@ namespace API.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("API.Entities.UserLike", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "SourseUser")
+                        .WithMany("LikedUsers")
+                        .HasForeignKey("SourseUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AppUser", "TargetUser")
+                        .WithMany("LikedByUsers")
+                        .HasForeignKey("TargetUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SourseUser");
+
+                    b.Navigation("TargetUser");
+                });
+
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
+                    b.Navigation("LikedByUsers");
+
+                    b.Navigation("LikedUsers");
+
                     b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618

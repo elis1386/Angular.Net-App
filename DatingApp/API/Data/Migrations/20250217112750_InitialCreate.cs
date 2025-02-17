@@ -37,6 +37,30 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Likes",
+                columns: table => new
+                {
+                    SourseUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TargetUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes", x => new { x.SourseUserId, x.TargetUserId });
+                    table.ForeignKey(
+                        name: "FK_Likes_Users_SourseUserId",
+                        column: x => x.SourseUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Likes_Users_TargetUserId",
+                        column: x => x.TargetUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Photos",
                 columns: table => new
                 {
@@ -59,6 +83,11 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Likes_TargetUserId",
+                table: "Likes",
+                column: "TargetUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Photos_AppUserId",
                 table: "Photos",
                 column: "AppUserId");
@@ -67,6 +96,9 @@ namespace API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Likes");
+
             migrationBuilder.DropTable(
                 name: "Photos");
 
