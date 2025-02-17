@@ -7,11 +7,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PhotoEditorComponent } from '../photo-editor/photo-editor.component';
+import { TimeagoModule } from 'ngx-timeago';
 
 @Component({
   selector: 'app-member-edit',
   standalone: true,
-  imports: [TabsModule, CommonModule, FormsModule, PhotoEditorComponent],
+  imports: [
+    TabsModule,
+    CommonModule,
+    FormsModule,
+    PhotoEditorComponent,
+    TimeagoModule,
+  ],
   templateUrl: './member-edit.component.html',
   styleUrl: './member-edit.component.css',
 })

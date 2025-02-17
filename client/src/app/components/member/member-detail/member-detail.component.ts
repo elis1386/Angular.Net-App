@@ -1,21 +1,22 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MembersService } from '../../../services/members.service';
 import { ActivatedRoute } from '@angular/router';
 import { Member } from '../../../models/member';
 import { CommonModule } from '@angular/common';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery';
+import { TimeagoModule } from 'ngx-timeago';
 
 @Component({
   selector: 'app-member-detail',
   standalone: true,
-  imports: [CommonModule, TabsModule, GalleryModule],
+  imports: [CommonModule, TabsModule, GalleryModule, TimeagoModule],
   templateUrl: './member-detail.component.html',
-  styleUrl: './member-detail.component.css',
+  styleUrls: ['./member-detail.component.css'],
 })
-export class MemberDetailComponent {
-  private memberService = inject(MembersService);
-  private route = inject(ActivatedRoute);
+export class MemberDetailComponent implements OnInit {
+  memberService = inject(MembersService);
+  route = inject(ActivatedRoute);
   member?: Member;
   images: GalleryItem[] = [];
 

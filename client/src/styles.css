@@ -70,3 +70,25 @@ a {
 .bs-datepicker-body table td.active-week span:hover {
   background-color: #78c3ad !important;
 }
+.page-link {
+  position: relative;
+  display: block;
+  padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+  font-size: var(--bs-pagination-font-size);
+  color: #78c3ad;
+  --bs-pagination-disabled-color: #609b8a;
+  --bs-pagination-active-bg: #f3969a;
+  --bs-pagination-active-border-color: #f3969a;
+  --bs-pagination-hover-bg: #f3969a;
+  --bs-pagination-hover-border-color: #f3969a;
+  --bs-pagination-disabled-bg: white;
+  --bs-pagination-disabled-border-color: #c3f2e4;
+  text-decoration: none;
+  background-color: white;
+  border: 1px solid #c3f2e4;
+  transition:
+    color 0.15sease-in-out,
+    background-color 0.15sease-in-out,
+    border-color 0.15sease-in-out,
+    box-shadow 0.15sease-in-out;
+}
