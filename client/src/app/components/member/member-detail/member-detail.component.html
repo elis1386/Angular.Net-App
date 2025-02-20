@@ -1,60 +1,70 @@
-@if (member) {
-  <div class="row">
-    <div class="col-4">
-      <div class="card">
-        <img
-          src="{{ member.photoUrl || './assets/urer.png' }}"
-          alt="member photo"
-          class="card-img img-thumbail"
-        />
-        <div class="card-body">
-          <div>
-            <strong>Location:</strong>
-            <p>{{ member.city }}, {{ member.country }}</p>
-          </div>
-          <div>
-            <strong>Age:</strong>
-            <p>{{ member.age }}</p>
-          </div>
-          <div>
-            <strong>Last active:</strong>
-            <p>{{ member.lastActive | timeago }}</p>
-          </div>
-          <div>
-            <strong>Member since:</strong>
-            <p>{{ member.created | date }}</p>
-          </div>
+<div class="row">
+  <div class="col-4">
+    <div class="card">
+      <img
+        src="{{ member.photoUrl || './assets/urer.png' }}"
+        alt="member photo"
+        class="card-img img-thumbail"
+      />
+      <div class="card-body">
+        <div>
+          <strong>Location:</strong>
+          <p>{{ member.city }}, {{ member.country }}</p>
         </div>
-        <div class="card-footer">
-          <div class="btn-group d-flex gap-4">
-            <button class="btn btn-primary">Like</button>
-            <button class="btn btn-info">Message</button>
-          </div>
+        <div>
+          <strong>Age:</strong>
+          <p>{{ member.age }}</p>
+        </div>
+        <div>
+          <strong>Last active:</strong>
+          <p>{{ member.lastActive | timeago }}</p>
+        </div>
+        <div>
+          <strong>Member since:</strong>
+          <p>{{ member.created | date }}</p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group d-flex gap-4">
+          <button class="btn btn-primary">Like</button>
+          <button class="btn btn-info" (click)="selectTab('Messages')">
+            Message
+          </button>
         </div>
       </div>
     </div>
-    <div class="col-8">
-      <tabset class="member-tabset">
-        <tab heading="About  {{ member.knownAs }}">
-          <h6 class="title">Description</h6>
-          <p>{{ member.introduction }}</p>
-          <h6 class="title">Looking for</h6>
-          <p>{{ member.lookingFor }}</p>
-        </tab>
-        <tab heading="Interesets">
-          <h6 class="title">Interesets</h6>
-          <p>{{ member.interests }}</p>
-        </tab>
-        <tab heading="Photos" #photoTab="tab">
-          @if (photoTab.active) {
-            <gallery [items]="images" class="gallery"></gallery>
-          }
-        </tab>
-        <tab heading="Messages">
-          <h6 class="title">Messages</h6>
-          <p>....</p>
-        </tab>
-      </tabset>
-    </div>
   </div>
-}
+  <div class="col-8">
+    <tabset class="member-tabset" #memberTabs>
+      <tab
+        heading="About  {{ member.knownAs }}"
+        (selectTab)="onTabActivated($event)"
+      >
+        <h6 class="title">Description</h6>
+        <p>{{ member.introduction }}</p>
+        <h6 class="title">Looking for</h6>
+        <p>{{ member.lookingFor }}</p>
+      </tab>
+      <tab heading="Interesets" (selectTab)="onTabActivated($event)">
+        <h6 class="title">Interesets</h6>
+        <p>{{ member.interests }}</p>
+      </tab>
+      <tab
+        heading="Photos"
+        #photoTab="tab"
+        (selectTab)="onTabActivated($event)"
+      >
+        @if (photoTab.active) {
+          <gallery [items]="images" class="gallery"></gallery>
+        }
+      </tab>
+      <tab heading="Messages" (selectTab)="onTabActivated($event)">
+        <app-member-messages
+          [username]="member.username"
+          [messages]="messages"
+          (updateMessages)="onUpdateMessages($event)"
+        ></app-member-messages>
+      </tab>
+    </tabset>
+  </div>
+</div>

@@ -9,8 +9,8 @@ import { LikesService } from './likes.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private http = inject(HttpClient);
-  private likeService = inject(LikesService);
+  http = inject(HttpClient);
+  likeService = inject(LikesService);
   baseUrl = environment.apiUrl;
   currentUser = signal<User | null>(null);
 
