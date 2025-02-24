@@ -18,3 +18,11 @@
 .title {
   margin-top: 1rem;
 }
+@media (max-width: 768px) {
+  .col-4 {
+    width: 100%;
+  }
+  .col-8 {
+    width: 100%;
+  }
+}

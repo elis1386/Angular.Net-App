@@ -6,7 +6,29 @@
   color: white;
 }
 img {
-  max-height: 30px;
+  max-height: 35px;
   border: 1px solid white;
   display: inline;
+  object-fit: cover;
+}
+.navbar-toggler,
+.navbar:hover {
+  color: rgba(var(--bs-primary-rgb));
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.navbar-toggler {
+  border-color: white !important;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    align-items: center;
+  }
+  .dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

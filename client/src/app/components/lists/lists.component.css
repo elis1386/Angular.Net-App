@@ -1,0 +1,6 @@
+@media (max-width: 768px) {
+  .col-2 {
+    width: 95%;
+    margin: auto;
+  }
+}

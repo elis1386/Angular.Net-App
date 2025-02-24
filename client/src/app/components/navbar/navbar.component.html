@@ -1,73 +1,93 @@
 <nav
   class="navbar navbar-expand-md navbar-primary bg-primary"
-  aria-label="Fourth navbar example"
+  aria-label="Dating App Navbar"
 >
   <div class="container">
     <a class="navbar-brand text-white" routerLink="/" routerLinkActive="active"
       >Dating App</a
     >
-    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-      @if (authService.currentUser()) {
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/members" routerLinkActive="active"
-            >Matches</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/lists" routerLinkActive="active"
-            >Lists</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/messages" routerLinkActive="active"
-            >Messages</a
-          >
-        </li>
-      }
-    </ul>
 
-    @if (authService.currentUser()) {
-      <div dropdown class="dropdown">
-        <img
-          class="me-2"
-          src="{{ authService.currentUser()?.photoUrl || './assets/user.png' }}"
-          alt="photo of user"
-        />
-        <a dropdownToggle class="dropdown-toggle text-light"
-          >Welcome {{ authService.currentUser()?.knownAs }}
-        </a>
-        <div *dropdownMenu class="dropdown-menu">
-          <a routerLink="/member/edit" class="dropdown-item">Edit profile</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()">Logout</a>
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon border-0"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        @if (authService.currentUser()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/members" routerLinkActive="active"
+              >Matches</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/lists" routerLinkActive="active"
+              >Lists</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/messages" routerLinkActive="active"
+              >Messages</a
+            >
+          </li>
+        }
+      </ul>
+
+      @if (authService.currentUser()) {
+        <div dropdown class="dropdown">
+          <img
+            class="me-2 rounded-circle"
+            width="40"
+            height="40"
+            src="{{
+              authService.currentUser()?.photoUrl || './assets/user.png'
+            }}"
+            alt="User Photo"
+          />
+          <a dropdownToggle class="dropdown-toggle text-light">
+            Welcome {{ authService.currentUser()?.knownAs }}
+          </a>
+          <div *dropdownMenu class="dropdown-menu">
+            <a routerLink="/member/edit" class="dropdown-item">Edit profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
         </div>
-      </div>
-    }
-    @if (!authService.currentUser()) {
-      <form
-        class="d-flex"
-        #loginForm="ngForm"
-        (ngSubmit)="login()"
-        autocomplete="off"
-      >
-        <input
-          class="rounded me-2 p-2 border-0"
-          type="text"
-          placeholder="Username"
-          name="username"
-          [(ngModel)]="model.username"
-          required
-        />
-        <input
-          class="rounded me-2 p-2 border-0"
-          type="password"
-          placeholder="Password"
-          name="password"
-          [(ngModel)]="model.password"
-          required
-        />
-        <button class="btn btn-secondary" type="submit">Login</button>
-      </form>
-    }
+      }
+
+      @if (!authService.currentUser()) {
+        <form
+          class="d-flex"
+          #loginForm="ngForm"
+          (ngSubmit)="login()"
+          autocomplete="off"
+        >
+          <input
+            class="rounded me-2 p-2 border-0"
+            type="text"
+            placeholder="Username"
+            name="username"
+            [(ngModel)]="model.username"
+            required
+          />
+          <input
+            class="rounded me-2 p-2 border-0"
+            type="password"
+            placeholder="Password"
+            name="password"
+            [(ngModel)]="model.password"
+            required
+          />
+          <button class="btn btn-secondary" type="submit">Login</button>
+        </form>
+      }
+    </div>
   </div>
 </nav>
