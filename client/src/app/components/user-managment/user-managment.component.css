@@ -1,0 +1,15 @@
+@media (max-width: 768px) {
+  .btn,
+  .btn-info,
+  td {
+    font-size: small;
+  }
+}
+
+@media (max-width: 375px) {
+  .btn,
+  .btn-info,
+  td {
+    font-size: x-small;
+  }
+}

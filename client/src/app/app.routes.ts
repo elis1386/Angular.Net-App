@@ -13,6 +13,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { authGuard } from './guards/auth.guard';
 import { preventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 import { memberDetailedResolver } from './resolvers/member-detailed.resolver';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,7 +26,6 @@ export const routes: Routes = [
       {
         path: 'members',
         component: MemberListComponent,
-        canActivate: [authGuard],
       },
       {
         path: 'members/:username',
@@ -38,6 +39,11 @@ export const routes: Routes = [
       },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
+      {
+        path: 'admin',
+        component: AdminPanelComponent,
+        canActivate: [adminGuard],
+      },
     ],
   },
   { path: 'not-found', component: NotFoundComponent },
