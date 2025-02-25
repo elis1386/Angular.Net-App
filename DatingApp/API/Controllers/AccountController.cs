@@ -1,6 +1,3 @@
-using System.Security.Cryptography;
-using System.Text;
-using API.Data;
 using API.DTO;
 using API.Entities;
 using API.Interfaces;
@@ -22,8 +19,10 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
     user.UserName = registerDTO.Username.ToLower();
 
     var result = await userManager.CreateAsync(user, registerDTO.Password);
-
     if (!result.Succeeded) return BadRequest(result.Errors);
+
+    var roleResult = await userManager.AddToRoleAsync(user, "Member");
+    if (!roleResult.Succeeded) return BadRequest(result.Errors);
 
     return new UserDTO
     {
@@ -39,9 +38,11 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
   [HttpPost("login")] // account/login
   public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
   {
-    var user = await userManager.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.NormalizedUserName == loginDTO.Username.ToUpper());
+    var user = await userManager.Users
+              .Include(p => p.Photos)
+              .SingleOrDefaultAsync(x => x.UserName == loginDTO.Username); ;
 
-    if (user == null || user.UserName == null) return Unauthorized("Invalid username");
+    if (user == null) return Unauthorized("Invalid username");
 
     var result = await userManager.CheckPasswordAsync(user, loginDTO.Password);
 
@@ -49,7 +50,7 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
 
     return new UserDTO
     {
-      Username = user.UserName,
+      Username = user.UserName!,
       Token = await tokenService.CreateToken(user),
       PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
       KnownAs = user.KnownAs,
