@@ -1,5 +1,5 @@
 .rounded-circle {
-  max-height: 50px;
+  max-height: 30px;
 }
 .card {
   border: none;
@@ -14,4 +14,12 @@
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px dotted #b3a9a9;
+}
+.card-body {
+  scroll-behavior: smooth;
+  overflow: scroll;
+  height: 62vh;
+}
+.card-footer {
+  padding: 1rem;
 }

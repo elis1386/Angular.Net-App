@@ -4,10 +4,7 @@ import { AuthService } from '../services/auth.service';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
-  const currentUser = authService.currentUser(); // Get user
-
-  console.log('Current User:', currentUser); // Debugging
-  console.log('Token:', currentUser?.token); // Check token
+  const currentUser = authService.currentUser();
 
   if (currentUser?.token) {
     req = req.clone({

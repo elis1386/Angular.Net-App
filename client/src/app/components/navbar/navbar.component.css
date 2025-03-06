@@ -31,4 +31,11 @@ img {
     justify-content: center;
     align-items: center;
   }
+  form {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .media {
+    margin-right: 0 !important;
+  }
 }

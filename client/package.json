@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "@microsoft/signalr": "^8.0.7",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
@@ -31,7 +32,7 @@
     "ngx-spinner": "^17.0.0",
     "ngx-timeago": "^3.0.0",
     "ngx-toastr": "^19.0.0",
-    "rxjs": "~7.8.0",
+    "rxjs": "^7.8.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
