@@ -10,7 +10,7 @@ namespace API.Controllers;
 
 public class AccountController(UserManager<AppUser> userManager, ITokenService tokenService, IMapper mapper) : BaseAPIController
 {
-  [HttpPost("register")] // account/register
+  [HttpPost("register")]
   public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
   {
     if (await UserExists(registerDTO.Username)) return BadRequest("Username is taken");

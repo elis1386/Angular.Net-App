@@ -15,8 +15,9 @@
   padding-bottom: 10px;
   border-bottom: 1px dotted #b3a9a9;
 }
-.card-body {
+.chat {
   scroll-behavior: smooth;
+  scrollbar-width: none;
   overflow: scroll;
   height: 62vh;
 }
