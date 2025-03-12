@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy ASP.Net Core app to Azure Web App - DateApp-ng-net
 
 on:
@@ -18,19 +15,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Шаг для вывода текущей директории и содержимого репозитория
+      - name: Display current directory and list files
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "List of files:"
+          ls -la
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
+      # Проверка правильности пути до .sln
+      - name: Verify solution file exists
+        run: |
+          if [ -f DatingApp.sln ]; then echo "Solution file found"; else echo "Solution file NOT found"; fi
+
+      # Попробуем указать полный путь, если файл в корне
       - name: Restore dependencies
-        run: dotnet restore DatingApp.sln
+        run: dotnet restore ./DatingApp.sln
 
       - name: Build with dotnet
-        run: dotnet build DatingApp.sln --configuration Release
+        run: dotnet build ./DatingApp.sln --configuration Release
 
       - name: Publish with dotnet
-        run: dotnet publish DatingApp.sln --configuration Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish ./DatingApp.sln --configuration Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
