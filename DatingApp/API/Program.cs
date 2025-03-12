@@ -17,15 +17,19 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 // Ensure CORS is configured before Authentication and Authorization
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
-                  .WithOrigins("http://localhost:4200", "https://localhost:4200"));
+                  .WithOrigins("http://localhost:4200", "https://localhost:4200", "https://dateapp-ng-net-gkc6e8dkaah8c8hb.westeurope-01.azurewebsites.net/"));
 
 // Authentication and Authorization should come after CORS configuration
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
+app.MapFallbackToController("Index", "Fallback");
 
 // Scope is used to create a new scope for the services
 using var scope = app.Services.CreateScope();
