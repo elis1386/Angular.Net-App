@@ -23,11 +23,14 @@ jobs:
         with:
           dotnet-version: '8.x'
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: Restore dependencies
+        run: dotnet restore DatingApp.sln
 
-      - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+      - name: Build with dotnet
+        run: dotnet build DatingApp.sln --configuration Release
+
+      - name: Publish with dotnet
+        run: dotnet publish DatingApp.sln --configuration Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -54,9 +57,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C1977F54912E4CC89B66254E80A156EC }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_5F70C5B12EF543A190EB85984450CE34 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9D7A1BB1170149ECBC4198330F159684 }}
+          client-id: ${{ secrets.__clientidsecretname__ }}
+          tenant-id: ${{ secrets.__tenantidsecretname__ }}
+          subscription-id: ${{ secrets.__subscriptionidsecretname__ }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -65,4 +68,3 @@ jobs:
           app-name: 'DateApp-ng-net'
           slot-name: 'Production'
           package: .
-          
