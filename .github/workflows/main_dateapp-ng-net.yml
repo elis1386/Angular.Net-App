@@ -15,16 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check current directory
+        run: pwd  # Проверим текущую директорию
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
-      # Указываем явный путь к решению
+      # Указываем абсолютный путь
       - name: Build with dotnet
         run: dotnet build ./DatingApp.sln --configuration Release
 
-      # Указываем явный путь к решению для публикации
       - name: dotnet publish
         run: dotnet publish ./DatingApp.sln --configuration Release -o "${{env.DOTNET_ROOT}}/myapp"
 
