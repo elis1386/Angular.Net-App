@@ -17,7 +17,7 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 // Ensure CORS is configured before Authentication and Authorization
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
-                  .WithOrigins("http://localhost:4200", "https://localhost:4200", "https://dateapp-ng-net-gkc6e8dkaah8c8hb.westeurope-01.azurewebsites.net/"));
+                  .WithOrigins("http://localhost:4200", "https://localhost:4200"));
 
 // Authentication and Authorization should come after CORS configuration
 app.UseAuthentication();
